@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Hunglish.Views.ItemsPage"
+             Title="Lessons"
+             x:Name="BrowseItemsPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Clicked="AddItem_Clicked" />
+    </ContentPage.ToolbarItems>
+  
+    <StackLayout>
+        <ListView x:Name="LessonsViewModel"
+                ItemsSource="{Binding Lessons}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding LoadItemsCommand}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                SelectionMode="None"
+                IsEnabled="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame CornerRadius="3" Margin="5" Padding="0">
+                            <StackLayout Orientation="Horizontal" Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Vertical" Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
+                                    <StackLayout 
+                                    Orientation="Horizontal" 
+                                    HorizontalOptions="FillAndExpand">
+                                        <ImageButton 
+                                    HorizontalOptions="Start"
+                                    BackgroundColor="Transparent"
+                                    CornerRadius="50"
+                                        BorderColor="#22a8f0"
+                                            Margin="5"
+                                        BorderWidth="1"
+                                    WidthRequest="35"
+                                    HeightRequest="35"
+                                    Source="edit.png"
+                                        Clicked="ImageButton_Clicked"
+                                    VerticalOptions="CenterAndExpand">
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Normal">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="Scale" Value="1" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Pressed">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="Scale" Value="0.8" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
+                                        </ImageButton>
+                                        <Label Text="{Binding Name}" 
+                                       Padding="0,0,0,0"
+                                d:Text="{Binding Name}"
+                                LineBreakMode="NoWrap"
+                                HorizontalOptions="CenterAndExpand"
+                                               Margin="5"
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" ></Label>
+                                    </StackLayout>
+                                    <ProgressBar Progress="{Binding Score}" Margin="10" BackgroundColor="#cccfce" ProgressColor="Green" HeightRequest="7" />
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="End"
+                                             WidthRequest="70"
+                                             Orientation="Horizontal"
+                                             VerticalOptions="FillAndExpand">
+                                    <ImageButton CornerRadius="0" 
+                                            Source="play.png" 
+                                            Padding="5"
+                                            BackgroundColor="Transparent"
+                                            WidthRequest="70"
+                                            VerticalOptions="FillAndExpand"
+                                            HorizontalOptions="FillAndExpand"
+                                            Clicked="Button_Clicked">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Scale" Value="1" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState x:Name="Pressed">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Scale" Value="0.8" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                    </ImageButton>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+    
+</ContentPage>

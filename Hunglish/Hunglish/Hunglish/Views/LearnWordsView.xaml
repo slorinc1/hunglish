@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xfFlipViewControl="clr-namespace:XFFlipViewControl"
+             mc:Ignorable="d"
+             Title="Learn words"
+             x:Class="Hunglish.Views.LearnWordsView">
+    <ContentPage.Content>
+        <xfFlipViewControl:XFFlipView
+                x:Name="XFFlipViewControl1">
+            <xfFlipViewControl:XFFlipView.FrontView>
+                <Frame
+                        Padding="0"
+                        BackgroundColor="#e6e9eb"
+                        HasShadow="True"
+                        OutlineColor="Silver">
+                    <StackLayout Margin="20,20,20,20">
+                        <StackLayout>
+                            <Button HorizontalOptions="EndAndExpand" Text="{Binding CurrentWord.Status}"
+                                    BackgroundColor="Transparent"
+                                    Padding="0"
+                                    Margin="0"
+                                    HeightRequest="30"
+                                    TextColor="Gray"
+                                    FontAttributes="Italic"
+                                    IsEnabled="False" BorderColor="Green" BorderWidth="1"/>
+                        </StackLayout>
+                        <StackLayout VerticalOptions="CenterAndExpand">
+                            <Label Text="{Binding CurrentWord.English}"
+                                   HorizontalOptions="CenterAndExpand" 
+                                   FontSize="25"
+                                   VerticalOptions="Center"/>
+                            <Label Text="{Binding CurrentWord.ExampleSentence}"
+                                   HorizontalOptions="CenterAndExpand" 
+                                   FontSize="16"
+                                   VerticalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+                            <Button Text="Show Answer" Padding="15" Clicked="Button_Clicked" VerticalOptions="EndAndExpand" BackgroundColor="#22a8f0"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </xfFlipViewControl:XFFlipView.FrontView>
+                <xfFlipViewControl:XFFlipView.BackView>
+                <Frame
+                        Padding="0"
+                        BackgroundColor="#e6e9eb"
+                        HasShadow="True"
+                        OutlineColor="Silver">
+                    <StackLayout Margin="20,20,20,20">
+                        <StackLayout>
+                            <Button HorizontalOptions="EndAndExpand" Text="{Binding CurrentWord.Status}"
+                                    BackgroundColor="Transparent"
+                                    Padding="0"
+                                    Margin="0"
+                                    HeightRequest="30"
+                                    TextColor="Gray"
+                                    FontAttributes="Italic"
+                                    IsEnabled="False" BorderColor="Green" BorderWidth="1"/>
+                        </StackLayout>
+                        <StackLayout VerticalOptions="CenterAndExpand">
+                            <Label Text="{Binding CurrentWord.Meaning}"
+                                   IsVisible="{Binding CurrentWord.AnswerVisible}"
+                                   HorizontalOptions="CenterAndExpand" 
+                                   FontSize="26"
+                                   VerticalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+                            <ImageButton 
+                                HorizontalOptions="StartAndExpand"
+                                    BackgroundColor="Transparent"
+                                    WidthRequest="140"
+                                    Source="right.png"
+                                Clicked="Right_Clicked"
+                                    VerticalOptions="CenterAndExpand">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="1" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="0.8" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </ImageButton>
+                            <ImageButton HorizontalOptions="EndAndExpand"
+                                         Clicked="Wrong_Clicked"
+                                    BackgroundColor="Transparent"
+                                    Source="wrong.png"
+                                    WidthRequest="140"
+                                    VerticalOptions="CenterAndExpand">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="1" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="0.8" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </ImageButton>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </xfFlipViewControl:XFFlipView.BackView>
+            </xfFlipViewControl:XFFlipView>
+    </ContentPage.Content>
+</ContentPage>

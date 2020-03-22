@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Hunglish.Views.EditWordsList"
+             Title="Words in the lesson"
+             x:Name="EditWordsListPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Clicked="AddItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <CollectionView x:Name="ItemsListView"
+                VerticalOptions="FillAndExpand"
+                  ItemsSource="{Binding Words}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame CornerRadius="1" Margin="1" Padding="1" BorderColor="AliceBlue">
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout HorizontalOptions="FillAndExpand"
+                                         Orientation="Vertical" Padding="0,0,0,0">
+                                <Entry Text="{Binding English}" TextColor="Gray"
+                                           HorizontalOptions="FillAndExpand" 
+                                           FontSize="Medium" MinimumWidthRequest="200" IsEnabled="False"/>
+                                <Entry Text="{Binding Meaning}" HorizontalOptions="FillAndExpand" MinimumWidthRequest="200"
+                                        IsEnabled="False"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Padding="1" Margin="5" HorizontalOptions="End">
+                                <BoxView  
+                               VerticalOptions="FillAndExpand"
+                               Margin="20,20,20,20"
+                               HorizontalOptions="Start"
+                               WidthRequest="1"
+                               Color="Gray"/>
+                                <ImageButton 
+                                    BackgroundColor="Transparent"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    Source="deleteiconpng60.png" 
+                                    Command="{Binding Path=BindingContext.DeleteWordCommand, Source={x:Reference EditWordsListPage}}"
+								CommandParameter="{Binding Id}"
+                                    VerticalOptions="Center">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="Scale" Value="1" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Pressed">
+                                                <VisualState.Setters>
+                                                    <Setter Property="Scale" Value="0.8" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                </ImageButton>
+                                <ImageButton 
+                                    BackgroundColor="Transparent"
+                                    WidthRequest="35"
+                                    HeightRequest="35"
+                                    Source="edit.png" 
+                                    Clicked="AddItem_Clicked"
+                                    CornerRadius="50"
+                                    VerticalOptions="Center">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="Scale" Value="1" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Pressed">
+                                                <VisualState.Setters>
+                                                    <Setter Property="Scale" Value="0.8" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                </ImageButton>
+
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>
