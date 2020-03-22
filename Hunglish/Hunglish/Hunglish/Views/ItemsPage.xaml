@@ -63,7 +63,7 @@
                                        Padding="0,0,0,0"
                                 d:Text="{Binding Name}"
                                 LineBreakMode="NoWrap"
-                                HorizontalOptions="CenterAndExpand"
+                                HorizontalOptions="StartAndExpand"
                                                Margin="5"
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="16" ></Label>
