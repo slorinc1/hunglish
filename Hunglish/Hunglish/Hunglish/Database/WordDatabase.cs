@@ -59,7 +59,7 @@ namespace Hunglish.Database
         public async Task<Lesson> GetLessonAsync(long lessonId)
         {
             var lesson = await Database.Table<Lesson>().Where(x => x.ID == lessonId).ToListAsync();
-                
+
             return lesson.FirstOrDefault();
         }
 
@@ -115,6 +115,37 @@ namespace Hunglish.Database
             update.IDontKnowCount = word.IDontKnowCount;
 
             return await Database.UpdateAsync(update);
+        }
+
+        public async Task ImportData(IEnumerable<ImportData> importData)
+        {
+            if (importData == null) { return; }
+
+            foreach (var importLesson in importData)
+            {
+                var lesson = new Lesson()
+                {
+                    Name = importLesson.LessonName
+                };
+
+                await Database.InsertAsync(lesson);
+
+                if (importLesson.Words != null)
+                {
+                    foreach (var importWord in importLesson.Words)
+                    {
+                        var word = new Word()
+                        {
+                            English = importWord.English,
+                            Meaning = importWord.Meaning,
+                            ExampleSentence = importWord.ExampleSentence,
+                            LessonId = lesson.ID
+                        };
+
+                        await Database.InsertAsync(word);
+                    }
+                }
+            }
         }
     }
 }

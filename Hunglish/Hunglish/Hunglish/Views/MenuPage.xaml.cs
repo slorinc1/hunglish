@@ -1,7 +1,11 @@
-﻿using Hunglish.Models;
+﻿using Hunglish.Database;
+using Hunglish.Models;
+using Newtonsoft.Json;
+using Plugin.FilePicker;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -36,5 +40,22 @@ namespace Hunglish.Views
                 await RootPage.NavigateFromMenu(id);
             };
         }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            var file = await CrossFilePicker.Current.PickFile(new string[] { "json" });
+
+            if (file != null && file.FileName.EndsWith(".json") )
+            {
+                var data = file.DataArray;
+
+                var json = Encoding.UTF8.GetString(data);
+
+                var importData = JsonConvert.DeserializeObject<IEnumerable<ImportData>>(json);
+
+                await State.Database.ImportData(importData);
+            }
+        }
+
     }
 }

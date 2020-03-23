@@ -6,16 +6,10 @@
              mc:Ignorable="d"
              x:Class="Hunglish.Views.MenuPage"
              Title="Menu">
-             
-    <StackLayout VerticalOptions="FillAndExpand">
+    <StackLayout VerticalOptions="Start" Orientation="Vertical">
         <ListView x:Name="ListViewMenu"
-                    HasUnevenRows="True">
-            <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Item 1</x:String>
-                    <x:String>Item 2</x:String>
-                </x:Array>
-            </d:ListView.ItemsSource>
+                    HasUnevenRows="True"
+                  VerticalOptions="Start">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -26,6 +20,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Text="Import" Clicked="Button_Clicked"/>
     </StackLayout>
 
 </ContentPage>
